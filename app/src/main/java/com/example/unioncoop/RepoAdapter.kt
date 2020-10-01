@@ -4,7 +4,6 @@ package com.example.unioncoop
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -116,6 +115,9 @@ class RepoAdapter : RecyclerView.Adapter<AbstractViewHolder<BaseObject>>() {
                     selectItem(false, items!![previousSelectedPosition], previousSelectedPosition)
                 }
                 previousSelectedPosition = position
+            } else if (previousSelectedPosition != -1) {
+                selectItem(false, items!![previousSelectedPosition], previousSelectedPosition)
+                previousSelectedPosition = -1
             }
         }
 
