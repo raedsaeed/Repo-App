@@ -52,4 +52,6 @@ class Repo : BaseObject() {
     @SerializedName("builtBy")
     @Expose
     var builtBy: List<BuiltBy>? = null
+
+    var isSelected = false
 }

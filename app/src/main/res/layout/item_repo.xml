@@ -1,102 +1,113 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:tools="http://schemas.android.com/tools">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv_item_repo_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dp_4">
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/iv_item_repo_avatar"
-            android:layout_width="@dimen/image_place_holder_48dp"
-            android:layout_height="@dimen/image_place_holder_48dp"
-            android:layout_margin="@dimen/dp_8"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_item_repo_author"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-            app:layout_constraintStart_toEndOf="@id/iv_item_repo_avatar"
-            app:layout_constraintTop_toTopOf="@id/iv_item_repo_avatar"
-            tools:text="Raed" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tv_item_repo_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dp_8"
-            android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
-            app:layout_constraintStart_toEndOf="@id/iv_item_repo_avatar"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_repo_author"
-            tools:text="Name" />
+        android:layout_margin="@dimen/dp_4"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardElevation="0dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/cl_item_repo_description_container"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@id/tv_item_repo_name"
-            app:layout_constraintTop_toBottomOf="@id/tv_item_repo_name">
+            android:animateLayoutChanges="true"
+            android:background="?attr/selectableItemBackground">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_item_repo_avatar"
+                android:layout_width="@dimen/image_place_holder_48dp"
+                android:layout_height="@dimen/image_place_holder_48dp"
+                android:layout_margin="@dimen/dp_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_item_repo_description"
+                android:id="@+id/tv_item_repo_author"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintStart_toEndOf="@id/iv_item_repo_avatar"
+                app:layout_constraintTop_toTopOf="@id/iv_item_repo_avatar"
+                tools:text="Raed" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_item_repo_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_8"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                app:layout_constraintStart_toEndOf="@id/iv_item_repo_avatar"
+                app:layout_constraintTop_toBottomOf="@id/tv_item_repo_author"
+                tools:text="Name" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/cl_item_repo_description_container"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_4"
-                android:padding="@dimen/dp_4"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="This is raed text very long text" />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_item_repo_lang"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/dp_8"
-                android:drawablePadding="@dimen/dp_4"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:drawableStartCompat="@drawable/red_circle"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@id/tv_item_repo_description"
-                app:layout_constraintTop_toBottomOf="@id/tv_item_repo_description"
-                tools:text="C++" />
-
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_item_repo_star_count"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dp_4"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:drawableStartCompat="@drawable/ic_star_24"
-                app:layout_constraintBottom_toBottomOf="@id/tv_item_repo_lang"
-                app:layout_constraintEnd_toStartOf="@id/tv_item_repo_star_fork"
-                app:layout_constraintStart_toEndOf="@id/tv_item_repo_lang"
-                app:layout_constraintTop_toTopOf="@id/tv_item_repo_lang"
-                tools:text="14,283" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_item_repo_star_fork"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:drawablePadding="@dimen/dp_4"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                app:drawableStartCompat="@drawable/ic_branch"
-                app:layout_constraintBottom_toBottomOf="@id/tv_item_repo_star_count"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/tv_item_repo_star_count"
-                app:layout_constraintTop_toTopOf="@id/tv_item_repo_star_count"
-                tools:text="14,283" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                app:layout_constraintStart_toStartOf="@id/tv_item_repo_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_item_repo_name">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_item_repo_description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_4"
+                    android:padding="@dimen/dp_4"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body2"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="This is raed text very long text" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_item_repo_lang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_8"
+                    android:drawablePadding="@dimen/dp_4"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:drawableStartCompat="@drawable/red_circle"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/tv_item_repo_description"
+                    app:layout_constraintTop_toBottomOf="@id/tv_item_repo_description"
+                    tools:text="C++" />
+
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_item_repo_star_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/dp_4"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:drawableStartCompat="@drawable/ic_star_24"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_item_repo_lang"
+                    app:layout_constraintEnd_toStartOf="@id/tv_item_repo_star_fork"
+                    app:layout_constraintStart_toEndOf="@id/tv_item_repo_lang"
+                    app:layout_constraintTop_toTopOf="@id/tv_item_repo_lang"
+                    tools:text="14,283" />
+
+                <com.google.android.material.textview.MaterialTextView
+                    android:id="@+id/tv_item_repo_star_fork"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:drawablePadding="@dimen/dp_4"
+                    android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                    app:drawableStartCompat="@drawable/ic_branch"
+                    app:layout_constraintBottom_toBottomOf="@id/tv_item_repo_star_count"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/tv_item_repo_star_count"
+                    app:layout_constraintTop_toTopOf="@id/tv_item_repo_star_count"
+                    tools:text="14,283" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
 </layout>

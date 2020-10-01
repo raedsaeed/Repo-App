@@ -2,7 +2,9 @@ package com.example.unioncoop
 
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -32,6 +34,7 @@ class RepoAdapter : RecyclerView.Adapter<AbstractViewHolder<BaseObject>>() {
     }
 
     private var items: MutableList<Repo>? = null
+    private var previousSelectedPosition = -1
 
     @Suppress("UNCHECKED_CAST")
     override fun onCreateViewHolder(
@@ -73,10 +76,21 @@ class RepoAdapter : RecyclerView.Adapter<AbstractViewHolder<BaseObject>>() {
     }
 
 
+    private fun selectItem(select: Boolean, repo: Repo, position: Int) {
+        repo.isSelected = select
+        items!![position] = repo
+        notifyItemChanged(position)
+    }
+
     internal inner class RepoViewHolder(viewBinding: ViewDataBinding) :
-        AbstractViewHolder<Repo>(viewBinding.root) {
+        AbstractViewHolder<Repo>(viewBinding.root), View.OnClickListener {
         private val binding = viewBinding as ItemRepoBinding
         private val requestManager: RequestManager = Glide.with(itemView)
+
+        init {
+            binding.cvItemRepoCard.setOnClickListener(this)
+            binding.ivItemRepoAvatar.setOnClickListener(this)
+        }
 
         override fun bind(element: Repo) {
             binding.tvItemRepoName.text = element.name
@@ -86,11 +100,23 @@ class RepoAdapter : RecyclerView.Adapter<AbstractViewHolder<BaseObject>>() {
             binding.tvItemRepoStarCount.text = element.stars.toString()
             binding.tvItemRepoStarFork.text = element.forks.toString()
 
-            // use imageView as context instead of itemView to fix
-            //java.lang.IllegalArgumentException : RequestManagerRetriever from crashes console
-            // again it happened again :) this is the second solution
             requestManager.load(element.avatar)
                 .into(binding.ivItemRepoAvatar)
+
+            binding.clItemRepoDescriptionContainer.visibility =
+                if (element.isSelected) View.VISIBLE else View.GONE
+
+        }
+
+        override fun onClick(v: View?) {
+            val position = bindingAdapterPosition
+            if (previousSelectedPosition != position) {
+                selectItem(true, items?.get(position)!!, position)
+                if (previousSelectedPosition != -1) {
+                    selectItem(false, items!![previousSelectedPosition], previousSelectedPosition)
+                }
+                previousSelectedPosition = position
+            }
         }
 
     }
