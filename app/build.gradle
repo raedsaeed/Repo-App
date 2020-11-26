@@ -1,16 +1,17 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'dagger.hilt.android.plugin'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
 
     defaultConfig {
         applicationId "com.example.unioncoop"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 1
         versionName "1.0"
 
@@ -59,20 +60,27 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:3.1.0'
 
     // Dagger
-    implementation 'com.google.dagger:dagger:2.28'
-    implementation 'com.google.dagger:dagger-android:2.28'
-    kapt 'com.google.dagger:dagger-android-processor:2.28'
-    kapt 'com.google.dagger:dagger-compiler:2.28'
+//    implementation 'com.google.dagger:dagger:2.28'
+//    implementation 'com.google.dagger:dagger-android:2.28'
+//    kapt 'com.google.dagger:dagger-android-processor:2.28'
+//    kapt 'com.google.dagger:dagger-compiler:2.28'
 
     //Retrofit dependencies
     implementation 'com.squareup.retrofit2:retrofit:2.6.1'
     implementation 'com.squareup.retrofit2:converter-gson:2.6.1'
+    implementation 'com.squareup.okhttp3:okhttp:4.9.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.5.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.14.1'
 
     // Rx dependency
     implementation 'io.reactivex.rxjava2:rxandroid:2.1.1'
     implementation 'io.reactivex.rxjava2:rxjava:2.2.9'
+
+    // Hilt dependency
+    implementation "com.google.dagger:hilt-android:2.28-alpha"
+    kapt "com.google.dagger:hilt-android-compiler:2.28-alpha"
+    implementation 'androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha02'
+    kapt 'androidx.hilt:hilt-compiler:1.0.0-alpha02'
 
     // Google Gson serialize dependency
     implementation 'com.google.code.gson:gson:2.8.6'

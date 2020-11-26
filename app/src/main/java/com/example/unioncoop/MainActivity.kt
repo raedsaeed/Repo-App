@@ -3,7 +3,6 @@ package com.example.unioncoop
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,9 +12,12 @@ import com.example.unioncoop.databinding.ActivityMainBinding
 import com.example.unioncoop.di.ViewModelFactory
 import com.example.unioncoop.objects.Repo
 import com.example.unioncoop.objects.Result
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
     @Inject
     lateinit var factory: ViewModelFactory
     private lateinit var binding: ActivityMainBinding
@@ -28,15 +30,8 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(binding.root)
 
-        val activityComponent = (applicationContext as BaseApplication)
-            .appComponent
-            .activityComponent()
-            .create()!!
-
-        activityComponent.inject(this)
-
         viewModel = ViewModelProvider(this, factory)[RepoViewModel::class.java]
-        viewModel.getRepoData().observe(this, Observer { populateUI(it) })
+        viewModel.getRepoData().observe(this, { populateUI(it) })
 
         initVars()
     }

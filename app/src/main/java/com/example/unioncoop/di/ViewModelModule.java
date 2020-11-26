@@ -8,6 +8,8 @@ import com.example.unioncoop.RepoViewModel;
 
 import dagger.Binds;
 import dagger.Module;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 import dagger.multibindings.IntoMap;
 
 /**
@@ -15,6 +17,7 @@ import dagger.multibindings.IntoMap;
  */
 @SuppressWarnings("unused")
 @Module
+@InstallIn(ApplicationComponent.class)
 public abstract class ViewModelModule {
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

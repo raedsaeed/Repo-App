@@ -17,6 +17,8 @@ import java.util.concurrent.TimeUnit;
 
 import dagger.Module;
 import dagger.Provides;
+import dagger.hilt.InstallIn;
+import dagger.hilt.android.components.ApplicationComponent;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
@@ -27,10 +29,10 @@ import retrofit2.converter.gson.GsonConverterFactory;
  * Created by Raed Saeed on 11/5/2019.
  */
 @Module
+@InstallIn(ApplicationComponent.class)
 public class NetworkModule {
-    private static final String BASE_URL = "https://ghapi.huchen.dev/";
+    private static final String BASE_URL = "https://private-anon-fb5ee58b2d-githubtrendingapi.apiary-mock.com/";
 
-    @ApplicationScope
     @Provides
     OkHttpClient getOkHttpClient() {
         HttpLoggingInterceptor interceptor = new HttpLoggingInterceptor(message -> Log.w("Logger", "log: " + message));
@@ -44,7 +46,6 @@ public class NetworkModule {
                 .build();
     }
 
-    @ApplicationScope
     @Provides
     public Gson getGson() {
         return new GsonBuilder()
@@ -54,7 +55,6 @@ public class NetworkModule {
                 .create();
     }
 
-    @ApplicationScope
     @Provides
     Retrofit getRetrofit(OkHttpClient client, Gson gson) {
         return new Retrofit.Builder()
@@ -65,7 +65,6 @@ public class NetworkModule {
                 .build();
     }
 
-    @ApplicationScope
     @Provides
     ApiService getApiService(Retrofit retrofit) {
         return retrofit.create(ApiService.class);
